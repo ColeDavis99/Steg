@@ -17,7 +17,6 @@ using namespace cimg_library;
 
 int main()
 {
-<<<<<<< HEAD
   //Make image and viewing window
   CImg<unsigned char> image("pic2.png");
   CImgDisplay disp1(image,"Before!");
