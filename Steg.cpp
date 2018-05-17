@@ -17,7 +17,6 @@ using namespace cimg_library;
 
 int main()
 {
-<<<<<<< HEAD
   //Make image and viewing window
   CImg<unsigned char> image("pic2.png");
   CImgDisplay disp1(image,"Before!");
@@ -60,6 +59,7 @@ int main()
   
   
   //Show the before and after
+/*
   CImgDisplay disp2(image2,"After!");
   while (!disp1.is_closed() && !disp2.is_closed())
   {
@@ -68,8 +68,18 @@ int main()
       image.display(disp1);
       image2.display(disp2);
   }
+*/
+  
+  //Here's some binary to char to int examples etc...
+  cout<<endl<<endl<<(int)'$'<<endl;
+  cout<<(char)36<<endl;
+  cout<<bitset<7>((int)'$')<<endl;
+  cout<<bitset<7>("0100100").to_ulong()<<endl;
+  cout<<(char)36<<endl;
+
   
   
+
 
   return 0;
 }
