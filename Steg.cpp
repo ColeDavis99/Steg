@@ -1,22 +1,29 @@
 /*====================================
   Developer: Cole Davis
-  Date: 05-15-2018
+  Date: 05-17-2018
 
-  Goal: Manipulate the RGB values of
-  two images and toggle the LSB
+  Goal: Detect which of 3 uses user
+  is doing:
+  1. Two photo decipher
+  2. Photo and Text File
+  3. Just Text file
+  
+  Uses: 
+  1. ./exe Image1.png Image2.png
+  2. ./exe Image1.png MyMessage.txt
+  3. ./exe MyMessage.txt
 =====================================*/
 
-#include <iostream>
-#include <bitset>
-using std::cout;
-using std::endl;
-using std::bitset;
-
+#include "Dependencies.h"
 #include "CImg.h"
 using namespace cimg_library;
 
-int main()
+int main(int argc, char *argv[])
 {
+  //Program Flow Control Variables
+  int which_process = -1;
+  
+  
   //Make image and viewing window
   CImg<unsigned char> image("pic2.png");
   CImgDisplay disp1(image,"Before!");
@@ -77,9 +84,9 @@ int main()
   cout<<bitset<7>("0100100").to_ulong()<<endl;
   cout<<(char)36<<endl;
 
-  
-  
 
+  //Check user's arguments
+  CheckArgs(argc, argv);  
 
   return 0;
 }
