@@ -5,10 +5,14 @@
 #include <bitset>
 #include <string>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
-#include "custom_funcs.h"
 using std::cout;
 using std::endl;
 using std::bitset;
+using std::ifstream;
+using std::stringstream;
+using std::getline;
 
 #endif

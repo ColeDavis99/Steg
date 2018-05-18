@@ -16,7 +16,11 @@ bool getFileExt(string& str1, string& ext);
 //Print out proper use of program arguments
 void printInstructions();
 
+//Returns true or false depending on if txt file opened succesfully
+bool openTxtFile(string txtPath, ifstream& line);
 
+//Reads in text file's information into one long strings
 
+//Converts strings into binary string version
 
 #endif
