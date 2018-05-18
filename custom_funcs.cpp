@@ -166,7 +166,7 @@ int junkPixels(int pixelDimension, int numPixels)
 void prettyColors(CImg<unsigned char>& img)
 {
   int min = 1;
-  int max = 255;
+  int max = 254;
 
   cimg_for(img,ptr,unsigned char)
   {

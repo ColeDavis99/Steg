@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
   int extraPixels = -1; //
   string origLSB = "";
   int area = -1;
+  int msgBinarySlider = 0;
 
 
 
@@ -126,9 +127,19 @@ int main(int argc, char *argv[])
 
        //Change LSB of steg.jpg so when comparing the bits,
        //they equal the binary of msgBinary
-       for(int i=0; i<(area-extraPixels); i++) //Iterates once for every pixel that is holding data we want
+
+
+       //Example of looping through both images
+       for(int c=0; c<3; c++)
        {
-         cout<<"This pixel has data"<<endl;
+         for(int x=0; x<pixelDimension; x++)
+         {
+           for(int y=0; y<pixelDimension; y++)
+           {
+             cout<<(int)original(y,x,0,c)<<", "; //All red, green, and lastly blue
+             cout<<(int)steg(y,x,0,c)<<endl<<endl;
+           }
+         }
        }
 
 
@@ -136,11 +147,13 @@ int main(int argc, char *argv[])
 
        // original.save("original.jpg");
        // steg.save("steg.jpg");
-       //display(steg);
-       //display(original);
-     }
+       // display(steg);
+       // display(original);
 
-       break;
+
+       cout<<endl<<"Message binary: "<<msgBinary<<endl;
+     }
+     break;
    }
 
     case 2:
