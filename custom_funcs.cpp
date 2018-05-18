@@ -1,6 +1,10 @@
 #include "Dependencies.h"
 #include "custom_funcs.h"
+#include "CImg.h"
+
+
 using std::string;
+using namespace cimg_library;
 
 /*======================
   USER INPUT FUNCTIONS
@@ -88,16 +92,81 @@ void printInstructions()
 /*==================
   OPEN TEXT FILE
 ===================*/
-bool openTxtFile(string txtPath, ifstream& line)
+bool openTxtFile(string txtPath, ifstream& inpStream)
 {
-  line.open(txtPath);
+  inpStream.open(txtPath);
 
-  if(line)
+  if(inpStream)
     return true;
 
   else
   {
     cout<<"File does not exist at directory \""<<txtPath<<"\""<<endl;
     return false;
+  }
+}
+
+
+/*=====================================================
+READS IN TEXT FILE'S INFORMATION INTO ONE LONG STRING
+======================================================*/
+void storeTxtFile(ifstream& inpStream, string line, string& msgChar)
+{
+  while(!inpStream.eof())
+  {
+    //Store entirety of message into var msgChar
+    getline(inpStream, line);
+    msgChar += line;
+  }
+  return;
+}
+
+
+/*=============================
+  CONVERTS STRING TO BINARY
+==============================*/
+string txtToBinary(string msgChar, string& msgBinary)
+{
+  for(auto character : msgChar)
+    msgBinary += bitset<7>((int)character).to_string();
+
+  return msgBinary;
+}
+
+
+/*===========================================
+  RETURN NUM PIXELS NEEDED TO HOLD TEXT INFO
+============================================*/
+int minNumPixels(int len)
+{
+  return ceil(2.33333 * len);
+}
+
+
+/*===========================================
+  MAKES GENERATED IMAGE RANDOMIZED AND PRETTY (for unsigned char images)
+============================================*/
+void prettyColors(CImg<unsigned char>& img)
+{
+  int min = 1;
+  int max = 255;
+
+  cimg_for(img,ptr,unsigned char)
+  {
+    *ptr = min + (rand() % static_cast<int>(max - min + 1));
+  }
+  return;
+}
+
+/*=================================
+  Easier syntax for displaying image
+==================================*/
+void display(CImg<unsigned char>& img)
+{
+  CImgDisplay disp(img,"Sample Text");
+  while (!disp.is_closed())
+  {
+      disp.wait();
+      img.display(disp);
   }
 }

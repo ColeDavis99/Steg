@@ -2,38 +2,37 @@
   Developer: Cole Davis
   Date: 05-17-2018
 
-  Goal: Detect which of 3 uses user
-  is doing:
-  1. Two photo decipher
-  2. Photo and Text File
-  3. Just Text file
+  Goal: Finish Case 1
 
   Uses:
   1. ./exe Image1.png Image2.png
   2. ./exe Image1.png MyMessage.txt
   3. ./exe MyMessage.txt
 =====================================*/
-#include "Dependencies.h"
-#include "custom_funcs.h"
 #include "CImg.h"
-
+#include "custom_funcs.h"
+#include "Dependencies.h"
 using namespace cimg_library;
 
 int main(int argc, char *argv[])
 {
+  //Pseudo random number seeding
+  srand(time(NULL));
+
   //See which of 3 process user is trying to accomplish
   int which_process = CheckArgs(argc, argv);
 
   // .txt variables & streams
-  ifstream line;
-  stringstream input_word;
-  stringstream input_char;
+  ifstream inpStream;
+  string line = "";
+  string msgChar = "";
   string msgBinary = "";
   string txtPath = "";
   bool txtExists = false;
 
-  string wub = "";
-
+  //original.jpg variables
+  int numPixels = -1;
+  int pixelDimension = -1; //This will be height and width, I make a square
 
 
 
@@ -97,10 +96,40 @@ int main(int argc, char *argv[])
    {
      //One text file
      txtPath = argv[1];
-     txtExists = openTxtFile(txtPath, line);
+     txtExists = openTxtFile(txtPath, inpStream);
+     if(txtExists)
+     {
+       storeTxtFile(inpStream, line, msgChar); //Store text file in one string
+       msgBinary = txtToBinary(msgChar, msgBinary); //Convert that string to binary
 
-     break;
+       //Get the number of pixels we're going to need to store the data
+       numPixels = minNumPixels(msgChar.length());
+
+       //Get the dimensions of our image
+       pixelDimension = (numPixels/2);
+       if(pixelDimension % 2 == 1)
+         pixelDimension++;
+
+       //We'll make two images, original.jpg and steg.jpg.
+       CImg<unsigned char> original(pixelDimension,pixelDimension,1,3);  // Define a pixDim x pixDim color image (3 channels).
+       prettyColors(original);  //Randomize pixel RGB values
+
+       //Copy construct steg.jpg
+       CImg<unsigned char> steg(original);
+
+
+       display(steg);
+       display(original);
+
+       original.save("original.jpg");
+       steg.save("steg.jpg");
+       //Change LSB of steg.jpg so when comparing the bits,
+       //they equal the binary of msgBinary
+     }
+
+       break;
    }
+
     case 2:
    {
      //One text file and one image file

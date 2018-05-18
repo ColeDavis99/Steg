@@ -1,7 +1,8 @@
 #ifndef CUSTOM_FUNCS_H
 #define CUSTOM_FUNCS_H
 #include "Dependencies.h"
-using std::string;
+#include "CImg.h"
+
 /*======================
   USER INPUT FUNCTIONS
 ========================*/
@@ -17,10 +18,22 @@ bool getFileExt(string& str1, string& ext);
 void printInstructions();
 
 //Returns true or false depending on if txt file opened succesfully
-bool openTxtFile(string txtPath, ifstream& line);
+bool openTxtFile(string txtPath, ifstream& inpStream);
 
-//Reads in text file's information into one long strings
+//Reads in text file's information into one long string
+void storeTxtFile(ifstream& inpStream, string line, string& msgChar);
 
 //Converts strings into binary string version
+string txtToBinary(string msgChar, string& msgBinary);
+
+//Return num pixels needed to hold text info
+int minNumPixels(int len);
+
+//Makes generated image randomized and pretty (for unsigned char images)
+void prettyColors(cimg_library::CImg<unsigned char>& img);
+
+//Easier syntax for displaying image
+void display(cimg_library::CImg<unsigned char>& img);
+
 
 #endif
