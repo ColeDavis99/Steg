@@ -29,6 +29,9 @@ string txtToBinary(string msgChar, string& msgBinary);
 //Return num pixels needed to hold text info
 int minNumPixels(int len);
 
+// Return side len the image needs to be (It will be a square)
+int sideLen(int numPixels);
+
 //Makes generated image randomized and pretty (for unsigned char images)
 void prettyColors(cimg_library::CImg<unsigned char>& img);
 

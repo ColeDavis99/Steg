@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
   string txtPath = "";
   bool txtExists = false;
 
-  //original.jpg variables
+  // .jpg variables
   int numPixels = -1;
   int pixelDimension = -1; //This will be height and width, I make a square
 
@@ -106,9 +106,7 @@ int main(int argc, char *argv[])
        numPixels = minNumPixels(msgChar.length());
 
        //Get the dimensions of our image
-       pixelDimension = (numPixels/2);
-       if(pixelDimension % 2 == 1)
-         pixelDimension++;
+       pixelDimension = sideLen(numPixels);
 
        //We'll make two images, original.jpg and steg.jpg.
        CImg<unsigned char> original(pixelDimension,pixelDimension,1,3);  // Define a pixDim x pixDim color image (3 channels).
@@ -118,13 +116,16 @@ int main(int argc, char *argv[])
        CImg<unsigned char> steg(original);
 
 
-       display(steg);
-       display(original);
-
-       original.save("original.jpg");
-       steg.save("steg.jpg");
        //Change LSB of steg.jpg so when comparing the bits,
        //they equal the binary of msgBinary
+
+
+
+
+       // original.save("original.jpg");
+       // steg.save("steg.jpg");
+       display(steg);
+       display(original);
      }
 
        break;

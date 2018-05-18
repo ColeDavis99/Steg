@@ -144,6 +144,14 @@ int minNumPixels(int len)
 
 
 /*===========================================
+  RETURN SIDE LEN THE IMAGE NEEDS TO BE (It will be a square)
+============================================*/
+int sideLen(int numPixels)
+{
+  return ceil(sqrt(numPixels));
+}
+
+/*===========================================
   MAKES GENERATED IMAGE RANDOMIZED AND PRETTY (for unsigned char images)
 ============================================*/
 void prettyColors(CImg<unsigned char>& img)
