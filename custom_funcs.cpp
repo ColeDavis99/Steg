@@ -151,6 +151,15 @@ int sideLen(int numPixels)
   return ceil(sqrt(numPixels));
 }
 
+
+/*===========================================
+    RETURN NUMBER OF EXTRA JUMK PIXELS (tacked on end so img is squares)
+============================================*/
+int junkPixels(int pixelDimension, int numPixels)
+{
+  return (pixelDimension*pixelDimension) - numPixels;
+}
+
 /*===========================================
   MAKES GENERATED IMAGE RANDOMIZED AND PRETTY (for unsigned char images)
 ============================================*/

@@ -31,9 +31,11 @@ int main(int argc, char *argv[])
   bool txtExists = false;
 
   // .jpg variables
-  int numPixels = -1;
+  int numPixels = -1; //The number of pixels our images will have, and still be square
   int pixelDimension = -1; //This will be height and width, I make a square
-
+  int extraPixels = -1; //
+  string origLSB = "";
+  int area = -1;
 
 
 
@@ -108,6 +110,12 @@ int main(int argc, char *argv[])
        //Get the dimensions of our image
        pixelDimension = sideLen(numPixels);
 
+       //Get the area of our image (This number includes every pixel, junk or not)
+       area = pixelDimension*pixelDimension;
+
+       //Get number of extra pixels tacked on to the bottom right of image to make it square
+       extraPixels = junkPixels(pixelDimension, numPixels);
+
        //We'll make two images, original.jpg and steg.jpg.
        CImg<unsigned char> original(pixelDimension,pixelDimension,1,3);  // Define a pixDim x pixDim color image (3 channels).
        prettyColors(original);  //Randomize pixel RGB values
@@ -118,14 +126,18 @@ int main(int argc, char *argv[])
 
        //Change LSB of steg.jpg so when comparing the bits,
        //they equal the binary of msgBinary
+       for(int i=0; i<(area-extraPixels); i++) //Iterates once for every pixel that is holding data we want
+       {
+         cout<<"This pixel has data"<<endl;
+       }
 
 
 
 
        // original.save("original.jpg");
        // steg.save("steg.jpg");
-       display(steg);
-       display(original);
+       //display(steg);
+       //display(original);
      }
 
        break;
