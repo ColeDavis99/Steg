@@ -2,12 +2,13 @@
   Developer: Cole Davis
   Date: 05-17-2018
 
-  Goal: Finish Case 1
+  Goal:(Make the case1 generated images rectangular
+  if need be, remove all junk pixels from existance)
 
   Uses:
-  1. ./exe Image1.png Image2.png
-  2. ./exe Image1.png MyMessage.txt
-  3. ./exe MyMessage.txt
+  1. ./exe MyMessage.txt
+  2. ./exe MyMessage.txt Image1.png
+  3. ./exe Image1.png Image2.png
 =====================================*/
 #include "CImg.h"
 #include "custom_funcs.h"
@@ -29,11 +30,11 @@ int main(int argc, char *argv[])
   string msgBinary = "";
   string txtPath = "";
   bool txtExists = false;
+  string secretMessage = "";
 
   // .jpg variables
   int numPixels = -1; //The number of pixels our images will have, and still be square
-  int pixelDimension = -1; //This will be height and width, I make a square
-  int extraPixels = -1; //The number of pixels that won't contain .txt data
+  int extraRGBVals = -1; //The it's possible 1 or 2 of the bottomrightmost pixel's value is junk
   int area = -1;
 
 
@@ -91,8 +92,8 @@ int main(int argc, char *argv[])
                                                                     */
   //Check user's arguments
 
-  switch(which_process)
-  {
+ switch(which_process)
+ {
    case 1:
    {
      //One text file
@@ -104,17 +105,15 @@ int main(int argc, char *argv[])
        msgBinary = txtToBinary(msgChar, msgBinary); //Convert that string to binary
 
        //Get the number of pixels we're going to need to store the data
-       numPixels = minNumPixels(msgChar.length());
+       numPixels = minNumPixels(msgChar.length(), extraRGBVals);
 
        //Get the dimensions of our image
-       pixelDimension = sideLen(numPixels);
+       //pixelDimension = sideLen(numPixels);
 
        //Get the area of our image (This number includes every pixel, junk or not)
-       area = pixelDimension*pixelDimension;
+       //area = pixelDimension*pixelDimension;
 
-       //Get number of extra pixels tacked on to the bottom right of image to make it square
-       extraPixels = junkPixels(pixelDimension, numPixels);
-
+/*
        //We'll make two images, original.jpg and steg.jpg.
        CImg<unsigned char> original(pixelDimension,pixelDimension,1,3);  // Define a pixDim x pixDim color image (3 channels).
        prettyColors(original);  //Randomize pixel RGB values
@@ -123,38 +122,40 @@ int main(int argc, char *argv[])
        CImg<unsigned char> steg(original);
 
        //Change the LSB of steg
-       txtToImgs(original, steg, msgBinary, pixelDimension);
+       txtToImgs(original, steg, msgBinary);
 
-       //Print out every pixel
-       matrixPrint(steg, original, pixelDimension);
+       //Save the newly generated images
+       original.save("original.jpg");
+       steg.save("steg.jpg");
 
-
-
-
-       // original.save("original.jpg");
-       // steg.save("steg.jpg");
-       // display(steg);
-       // display(original);
-
-
-       cout<<endl<<"Message binary: "<<msgBinary<<endl;
+ */
      }
      break;
    }
 
-    case 2:
+   case 2:
    {
      //One text file and one image file
 
      break;
    }
-    case 3:
+   case 3:
    {
-     //Two image files
+     //Copy in the image files from the directory
+     CImg<unsigned char> img1(argv[1]);
+     CImg<unsigned char> img2(argv[2]);
 
+     //Extract msgBinary from two images
+     msgBinary = bnryMsgFromImgs(img1, img2);
+
+     //Turn the binary into the message
+     msgChar = bnryToChar(msgBinary);
+
+     cout<<"Secret message: "<<msgChar<<endl<<endl;
+     cout<<endl<<"Message binary: "<<msgBinary<<endl;
      break;
    }
-  }
+ }
 
 
 

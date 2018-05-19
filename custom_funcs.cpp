@@ -137,8 +137,9 @@ string txtToBinary(string msgChar, string& msgBinary)
 /*===========================================
   RETURN NUM PIXELS NEEDED TO HOLD TEXT INFO
 ============================================*/
-int minNumPixels(int len)
+int minNumPixels(int len, int& extraRGBVals)
 {
+  cout<<(3%len)<<endl;
   return ceil(2.33333 * len);
 }
 
@@ -192,24 +193,26 @@ void display(CImg<unsigned char>& img)
 /*================================
   Change the LSB of 2nd .jpg image
 =================================*/
-void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBinary, int pixelDimension)
+void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBinary)
 {
   int msgBinarySlider = 0;
+  int height = orig.height();
+  int width = orig.width();
 
   //Change the LSB of steg so comparing the two .jpg's results in the same 0 or 1 of msgBinary
   for(int c=0; c<3; c++)
   {
-    for(int x=0; x<pixelDimension; x++)
+    for(int x=0; x<width; x++)
     {
-      for(int y=0; y<pixelDimension; y++)
+      for(int y=0; y<height; y++)
       {
-        //This goto keeps me from changing the LSB of junk pixels, and I didn't want to make an ugly triple while loop with ctr's.
-        if(msgBinarySlider == msgBinary.length())
+        //Don't change LSB of junk RGB values
+        if(msgBinarySlider >= msgBinary.length())
           goto doneProcessing;
 
         //The if & else if are where the LSB is actually changed. I know I can increment steg w/o checking b/c RGB values are 1->254 inside of prettyColors()
         if(msgBinary[msgBinarySlider] == '0')
-          if((int)orig(y,x,0,c)%2 == (int)steg(y,x,0,c)%2) //Make the LSB of this pixel's R,G,or B value different
+          if((int)orig(y,x,0,c)%2 == (int)steg(y,x,0,c)%2)
             steg(y,x,0,c)++;
 
         else if(msgBinary[msgBinarySlider] == '1')
@@ -226,20 +229,51 @@ void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBi
 
 
 /*=============================================
-  PRINT OUT THE RGB VALUES IN A MATRIX FASHION
+    EXTRACT MESSAGE FROM TWO IMAGES
 ==============================================*/
-void matrixPrint(CImg<unsigned char>& img1, CImg<unsigned char>& img2, int pixelDimension)
+string bnryMsgFromImgs(CImg<unsigned char> img1, CImg<unsigned char> img2)
 {
-  cout<<"matrixPrint outputs EVERY pixel, so there may be junk at the end"<<endl;
+  string retBinary = "";
+  int height = img1.height();
+  int width = img1.width();
+
   for(int c=0; c<3; c++)
   {
-    for(int x=0; x<pixelDimension; x++)
+    for(int x=0; x<width; x++)
     {
-      for(int y=0; y<pixelDimension; y++)
+      for(int y=0; y<height; y++)
       {
-        cout<<(int)img1(y,x,0,c)<<", "; //All red, green, and lastly blue
-        cout<<(int)img2(y,x,0,c)<<endl; //All red, green, and lastly blue
+        //Compare the last bits of the RGB values of this pixel
+        if((((int)img1(y,x,0,c)%2 == (int)img2(y,x,0,c)%2)))
+          retBinary+="1";
+        else
+          retBinary+="0";
       }
     }
   }
+  return retBinary;
+}
+
+
+/*==================================
+ TURN BINARY STRING INTO CHAR STRING
+====================================*/
+string bnryToChar(string msgBinary)
+{
+  string retStr = "";
+  string bnryLetter = "";
+  int mediator = -1;
+
+  for(int i=0; i<msgBinary.length()-1; i++)
+  {
+    (msgBinary[i] == '0') ? bnryLetter+="0" : bnryLetter+="1";
+
+    if(bnryLetter.length() == 7)
+    {
+      mediator = (char)bitset<7>(bnryLetter).to_ulong();
+      retStr+=(char)mediator;
+      bnryLetter = "";
+    }
+  }
+  return retStr;
 }

@@ -28,13 +28,13 @@ void storeTxtFile(ifstream& inpStream, string line, string& msgChar);
 string txtToBinary(string msgChar, string& msgBinary);
 
 //Return num pixels needed to hold text info
-int minNumPixels(int len);
+int minNumPixels(int len, int& extraRGBVals);
 
 // Return side len the image needs to be (It will be a square)
-int sideLen(int numPixels);
+//int sideLen(int numPixels);
 
 //return number of extra jumk pixels (tacked on end so img is squares)
-int junkPixels(int pixelDimension, int numPixels);
+//int junkPixels(int pixelDimension, int numPixels);
 
 //Makes generated image randomized and pretty (for unsigned char images)
 void prettyColors(cimg_library::CImg<unsigned char>& img);
@@ -42,10 +42,13 @@ void prettyColors(cimg_library::CImg<unsigned char>& img);
 //Easier syntax for displaying image
 void display(cimg_library::CImg<unsigned char>& img);
 
-//Print out the rgb values in a matrix fashion
-void matrixPrint(cimg_library::CImg<unsigned char>& img1, cimg_library::CImg<unsigned char>& img2, int pixelDimension);
-
 //Change the LSB of steg (this is where the message is actally stegified into the images)
-void txtToImgs(cimg_library::CImg<unsigned char> orig, cimg_library::CImg<unsigned char>& steg, string msgBinary, int pixelDimension);
+void txtToImgs(cimg_library::CImg<unsigned char> orig, cimg_library::CImg<unsigned char>& steg, string msgBinary);
+
+//Get the binary secret message from the two pictures
+string bnryMsgFromImgs(cimg_library::CImg<unsigned char> img1, cimg_library::CImg<unsigned char> img2);
+
+//TURN BINARY STRING INTO CHAR STRING
+string bnryToChar(string msgBinary);
 
 #endif
