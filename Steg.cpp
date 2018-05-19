@@ -33,10 +33,8 @@ int main(int argc, char *argv[])
   // .jpg variables
   int numPixels = -1; //The number of pixels our images will have, and still be square
   int pixelDimension = -1; //This will be height and width, I make a square
-  int extraPixels = -1; //
-  string origLSB = "";
+  int extraPixels = -1; //The number of pixels that won't contain .txt data
   int area = -1;
-  int msgBinarySlider = 0;
 
 
 
@@ -124,23 +122,11 @@ int main(int argc, char *argv[])
        //Copy construct steg.jpg
        CImg<unsigned char> steg(original);
 
+       //Change the LSB of steg
+       txtToImgs(original, steg, msgBinary, pixelDimension);
 
-       //Change LSB of steg.jpg so when comparing the bits,
-       //they equal the binary of msgBinary
-
-
-       //Example of looping through both images
-       for(int c=0; c<3; c++)
-       {
-         for(int x=0; x<pixelDimension; x++)
-         {
-           for(int y=0; y<pixelDimension; y++)
-           {
-             cout<<(int)original(y,x,0,c)<<", "; //All red, green, and lastly blue
-             cout<<(int)steg(y,x,0,c)<<endl<<endl;
-           }
-         }
-       }
+       //Print out every pixel
+       matrixPrint(steg, original, pixelDimension);
 
 
 

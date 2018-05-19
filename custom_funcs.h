@@ -3,6 +3,7 @@
 #include "Dependencies.h"
 #include "CImg.h"
 
+
 /*======================
   USER INPUT FUNCTIONS
 ========================*/
@@ -41,5 +42,10 @@ void prettyColors(cimg_library::CImg<unsigned char>& img);
 //Easier syntax for displaying image
 void display(cimg_library::CImg<unsigned char>& img);
 
+//Print out the rgb values in a matrix fashion
+void matrixPrint(cimg_library::CImg<unsigned char>& img1, cimg_library::CImg<unsigned char>& img2, int pixelDimension);
+
+//Change the LSB of steg (this is where the message is actally stegified into the images)
+void txtToImgs(cimg_library::CImg<unsigned char> orig, cimg_library::CImg<unsigned char>& steg, string msgBinary, int pixelDimension);
 
 #endif

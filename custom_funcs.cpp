@@ -187,3 +187,59 @@ void display(CImg<unsigned char>& img)
       img.display(disp);
   }
 }
+
+
+/*================================
+  Change the LSB of 2nd .jpg image
+=================================*/
+void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBinary, int pixelDimension)
+{
+  int msgBinarySlider = 0;
+
+  //Change the LSB of steg so comparing the two .jpg's results in the same 0 or 1 of msgBinary
+  for(int c=0; c<3; c++)
+  {
+    for(int x=0; x<pixelDimension; x++)
+    {
+      for(int y=0; y<pixelDimension; y++)
+      {
+        //This goto keeps me from changing the LSB of junk pixels, and I didn't want to make an ugly triple while loop with ctr's.
+        if(msgBinarySlider == msgBinary.length())
+          goto doneProcessing;
+
+        //The if & else if are where the LSB is actually changed. I know I can increment steg w/o checking b/c RGB values are 1->254 inside of prettyColors()
+        if(msgBinary[msgBinarySlider] == '0')
+          if((int)orig(y,x,0,c)%2 == (int)steg(y,x,0,c)%2) //Make the LSB of this pixel's R,G,or B value different
+            steg(y,x,0,c)++;
+
+        else if(msgBinary[msgBinarySlider] == '1')
+          if((int)orig(y,x,0,c)%2 != (int)steg(y,x,0,c)%2)
+            steg(y,x,0,c)++;
+
+        msgBinarySlider++; //Increment every time
+      }
+    }
+  }
+  doneProcessing:
+  return;
+}
+
+
+/*=============================================
+  PRINT OUT THE RGB VALUES IN A MATRIX FASHION
+==============================================*/
+void matrixPrint(CImg<unsigned char>& img1, CImg<unsigned char>& img2, int pixelDimension)
+{
+  cout<<"matrixPrint outputs EVERY pixel, so there may be junk at the end"<<endl;
+  for(int c=0; c<3; c++)
+  {
+    for(int x=0; x<pixelDimension; x++)
+    {
+      for(int y=0; y<pixelDimension; y++)
+      {
+        cout<<(int)img1(y,x,0,c)<<", "; //All red, green, and lastly blue
+        cout<<(int)img2(y,x,0,c)<<endl; //All red, green, and lastly blue
+      }
+    }
+  }
+}
