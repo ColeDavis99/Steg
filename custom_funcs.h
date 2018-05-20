@@ -30,8 +30,8 @@ string txtToBinary(string msgChar, string& msgBinary);
 //Return num pixels needed to hold text info
 int minNumPixels(int len, int& extraRGBVals);
 
-// Return side len the image needs to be (It will be a square)
-//int sideLen(int numPixels);
+//Recursively find two number that multiply and add up to numPixels
+void sideLen(int& height, int& width, int numPixels);
 
 //return number of extra jumk pixels (tacked on end so img is squares)
 //int junkPixels(int pixelDimension, int numPixels);

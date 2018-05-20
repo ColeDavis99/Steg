@@ -139,27 +139,28 @@ string txtToBinary(string msgChar, string& msgBinary)
 ============================================*/
 int minNumPixels(int len, int& extraRGBVals)
 {
-  cout<<(3%len)<<endl;
-  return ceil(2.33333 * len);
+  cout<<(ceil(2.3333333333 * len) - (2.3333333333*len))<<endl;
+  return ceil(2.3333333333 * len);
 }
 
 
 /*===========================================
-  RETURN SIDE LEN THE IMAGE NEEDS TO BE (It will be a square)
+Recursively find two numbers that multiply and add up to numPixels
 ============================================*/
-int sideLen(int numPixels)
+void sideLen(int& height, int& width, int numPixels)
 {
-  return ceil(sqrt(numPixels));
+
+  //return ceil(sqrt(numPixels));
 }
 
 
 /*===========================================
-    RETURN NUMBER OF EXTRA JUMK PIXELS (tacked on end so img is squares)
+    RETURN NUMBER OF EXTRA JUNK PIXELS (tacked on end so img is squares)
 ============================================*/
-int junkPixels(int pixelDimension, int numPixels)
-{
-  return (pixelDimension*pixelDimension) - numPixels;
-}
+// int junkPixels(int pixelDimension, int numPixels)
+// {
+//   return (pixelDimension*pixelDimension) - numPixels;
+// }
 
 /*===========================================
   MAKES GENERATED IMAGE RANDOMIZED AND PRETTY (for unsigned char images)

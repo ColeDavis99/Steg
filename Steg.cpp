@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
   int numPixels = -1; //The number of pixels our images will have, and still be square
   int extraRGBVals = -1; //The it's possible 1 or 2 of the bottomrightmost pixel's value is junk
   int area = -1;
+  int height = -1;
+  int width = -1;
 
 
 
