@@ -28,7 +28,10 @@ void storeTxtFile(ifstream& inpStream, string line, string& msgChar);
 string txtToBinary(string msgChar, string& msgBinary);
 
 //Return num pixels needed to hold text info
-int minNumPixels(int len, int& extraRGBVals);
+int minNumPixels(int len);
+
+//Return number of extra RGB values in the bottom right pixel of the image (0,1, or 2)
+int extraRGB(int len);
 
 //Recursively find two number that multiply and add up to numPixels
 void sideLen(int& height, int& width, int numPixels);

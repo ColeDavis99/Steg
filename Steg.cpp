@@ -107,7 +107,11 @@ int main(int argc, char *argv[])
        msgBinary = txtToBinary(msgChar, msgBinary); //Convert that string to binary
 
        //Get the number of pixels we're going to need to store the data
-       numPixels = minNumPixels(msgChar.length(), extraRGBVals);
+       numPixels = minNumPixels(msgChar.length());
+
+       //Get the number of extra RGB values in the bottom right pixel of steg.jpg
+       extraRGBVals = extraRGB(msgChar.length());
+
 
        //Get the dimensions of our image
        //pixelDimension = sideLen(numPixels);

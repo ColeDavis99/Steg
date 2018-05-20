@@ -134,13 +134,32 @@ string txtToBinary(string msgChar, string& msgBinary)
 }
 
 
-/*===========================================
+/*============================================
   RETURN NUM PIXELS NEEDED TO HOLD TEXT INFO
-============================================*/
-int minNumPixels(int len, int& extraRGBVals)
+=============================================*/
+int minNumPixels(int len)
 {
-  cout<<(ceil(2.3333333333 * len) - (2.3333333333*len))<<endl;
-  return ceil(2.3333333333 * len);
+  double pxPerChar = 2.3333333333;
+
+  //Return the number of pixels
+  return ceil(pxPerChar * len);
+}
+
+
+/*=========================================
+RETURN NUMBER OF EXTRA RGB VALS (0,1, or 2)
+===========================================*/
+int extraRGB(int len)
+{
+  double pxPerChar = 2.3333333333;
+
+  //Find the number of extra RGB values in the bottom right pixel of the image
+  if((ceil(pxPerChar * len) - (pxPerChar*len)) < 0.3)
+    return 0;
+  else if((ceil(pxPerChar * len) - (pxPerChar*len)) > 0.6)
+    return 2;
+  else
+    return 1;
 }
 
 
