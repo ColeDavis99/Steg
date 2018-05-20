@@ -112,16 +112,17 @@ int main(int argc, char *argv[])
        //Get the number of extra RGB values in the bottom right pixel of steg.jpg
        extraRGBVals = extraRGB(msgChar.length());
 
-
        //Get the dimensions of our image
-       //pixelDimension = sideLen(numPixels);
+       sideLen(numPixels, height, width);
 
        //Get the area of our image (This number includes every pixel, junk or not)
-       //area = pixelDimension*pixelDimension;
+       area = height * width;
 
-/*
+
+
+
        //We'll make two images, original.jpg and steg.jpg.
-       CImg<unsigned char> original(pixelDimension,pixelDimension,1,3);  // Define a pixDim x pixDim color image (3 channels).
+       CImg<unsigned char> original(width, height,1,3);  // Define a pixDim x pixDim color image (3 channels).
        prettyColors(original);  //Randomize pixel RGB values
 
        //Copy construct steg.jpg
@@ -130,11 +131,17 @@ int main(int argc, char *argv[])
        //Change the LSB of steg
        txtToImgs(original, steg, msgBinary);
 
+       display(original);
+       display(steg);
        //Save the newly generated images
-       original.save("original.jpg");
-       steg.save("steg.jpg");
+       //original.save("original.jpg");
+       //steg.save("steg.jpg");
 
- */
+       cout<<"We're going to need "<<area<<" pixels."<<endl;
+       cout<<"Height is: "<<height<<endl;
+       cout<<"Width is: "<<width<<endl;
+       cout<<"There will be "<<extraRGBVals<<" extra RGB values."<<endl;
+
      }
      break;
    }

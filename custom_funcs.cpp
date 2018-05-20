@@ -164,12 +164,26 @@ int extraRGB(int len)
 
 
 /*===========================================
-Recursively find two numbers that multiply and add up to numPixels
+ Find two "squarest" ints that multiply and add up to numPixels
 ============================================*/
-void sideLen(int& height, int& width, int numPixels)
+void sideLen(int numPixels, int& height, int& width)
 {
+  std::vector<int> allFactors;
+  int testNum = 1;
 
-  //return ceil(sqrt(numPixels));
+  while(testNum <= numPixels)
+  {
+    if(numPixels % testNum == 0)
+      allFactors.push_back(testNum);
+
+    testNum++;
+  }
+
+  //I generate a list of all factors, increasing. Using this, I get the two
+  //largest and "squarest" dimensions possible.
+  width = allFactors[allFactors.size()/2];
+  height = allFactors[allFactors.size()/2 -1];
+  return;
 }
 
 
@@ -222,9 +236,9 @@ void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBi
   //Change the LSB of steg so comparing the two .jpg's results in the same 0 or 1 of msgBinary
   for(int c=0; c<3; c++)
   {
-    for(int x=0; x<width; x++)
+    for(int x=0; x<height; x++)
     {
-      for(int y=0; y<height; y++)
+      for(int y=0; y<width; y++)
       {
         //Don't change LSB of junk RGB values
         if(msgBinarySlider >= msgBinary.length())
