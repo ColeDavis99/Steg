@@ -134,8 +134,8 @@ int main(int argc, char *argv[])
        display(original);
        display(steg);
        //Save the newly generated images
-       //original.save("original.jpg");
-       //steg.save("steg.jpg");
+       original.save("original.jpg");
+       steg.save("steg.jpg");
 
        cout<<"We're going to need "<<area<<" pixels."<<endl;
        cout<<"Height is: "<<height<<endl;
@@ -159,10 +159,10 @@ int main(int argc, char *argv[])
      CImg<unsigned char> img2(argv[2]);
 
      //Extract msgBinary from two images
-     msgBinary = bnryMsgFromImgs(img1, img2);
+     msgBinary = bnryMsgFromImgs(img1, img2, extraRGBVals);  //One or both of these two are a lil bit off
 
      //Turn the binary into the message
-     msgChar = bnryToChar(msgBinary);
+     msgChar = bnryToChar(msgBinary);  //One or both of these two are a lil bit off
 
      cout<<"Secret message: "<<msgChar<<endl<<endl;
      cout<<endl<<"Message binary: "<<msgBinary<<endl;

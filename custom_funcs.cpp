@@ -265,7 +265,7 @@ void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBi
 /*=============================================
     EXTRACT MESSAGE FROM TWO IMAGES
 ==============================================*/
-string bnryMsgFromImgs(CImg<unsigned char> img1, CImg<unsigned char> img2)
+string bnryMsgFromImgs(CImg<unsigned char> img1, CImg<unsigned char> img2, int extra)
 {
   string retBinary = "";
   int height = img1.height();
@@ -273,15 +273,20 @@ string bnryMsgFromImgs(CImg<unsigned char> img1, CImg<unsigned char> img2)
 
   for(int c=0; c<3; c++)
   {
-    for(int x=0; x<width; x++)
+    for(int x=0; x<height; x++)
     {
-      for(int y=0; y<height; y++)
+      for(int y=0; y<width; y++)
       {
-        //Compare the last bits of the RGB values of this pixel
-        if((((int)img1(y,x,0,c)%2 == (int)img2(y,x,0,c)%2)))
-          retBinary+="1";
-        else
-          retBinary+="0";
+        //Don't process any extra RGB values in the btm rt pixel
+        if(x==height && y> width-extraRGBVals)
+        {
+          cout<<"WUB"<<endl;
+          //Compare the last bits of the RGB values of this pixel
+          if((((int)img1(y,x,0,c)%2 == (int)img2(y,x,0,c)%2)))
+            retBinary+="1";
+          else
+            retBinary+="0";
+        }
       }
     }
   }
