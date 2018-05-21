@@ -46,10 +46,10 @@ void prettyColors(cimg_library::CImg<unsigned char>& img);
 void display(cimg_library::CImg<unsigned char>& img);
 
 //Change the LSB of steg (this is where the message is actally stegified into the images)
-void txtToImgs(cimg_library::CImg<unsigned char> orig, cimg_library::CImg<unsigned char>& steg, string msgBinary);
+void txtToImgs(cimg_library::CImg<unsigned char>& orig, cimg_library::CImg<unsigned char>& steg, string msgBinary);
 
 //Get the binary secret message from the two pictures
-string bnryMsgFromImgs(cimg_library::CImg<unsigned char> img1, cimg_library::CImg<unsigned char> img2, int extra);
+string bnryMsgFromImgs(cimg_library::CImg<unsigned char>& img1, cimg_library::CImg<unsigned char>& img2);
 
 //TURN BINARY STRING INTO CHAR STRING
 string bnryToChar(string msgBinary);

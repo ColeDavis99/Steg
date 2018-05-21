@@ -7,8 +7,8 @@
 
   Uses:
   1. ./exe MyMessage.txt
-  2. ./exe MyMessage.txt Image1.png
-  3. ./exe Image1.png Image2.png
+  2. ./exe MyMessage.txt Image1.jpg
+  3. ./exe Image1.jpg Image2.jpg
 =====================================*/
 #include "CImg.h"
 #include "custom_funcs.h"
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
                                                         /*
   //Make image and viewing window
-  CImg<unsigned char> image("pic2.png");
+  CImg<unsigned char> image("pic2.jpg");
   CImgDisplay disp1(image,"Before!");
   CImg<unsigned char> image2 = image;
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
 
 
        //We'll make two images, original.jpg and steg.jpg.
-       CImg<unsigned char> original(width, height,1,3);  // Define a pixDim x pixDim color image (3 channels).
+       CImg<unsigned char> original(width, height, 1, 3);  // Define a pixDim x pixDim color image (3 channels).
        prettyColors(original);  //Randomize pixel RGB values
 
        //Copy construct steg.jpg
@@ -131,17 +131,18 @@ int main(int argc, char *argv[])
        //Change the LSB of steg
        txtToImgs(original, steg, msgBinary);
 
-       display(original);
-       display(steg);
+       //display(original);
+       //display(steg);
+
        //Save the newly generated images
-       original.save("original.jpg");
-       steg.save("steg.jpg");
+       original.save("original.bmp");
+       steg.save("steg.bmp");
 
-       cout<<"We're going to need "<<area<<" pixels."<<endl;
-       cout<<"Height is: "<<height<<endl;
-       cout<<"Width is: "<<width<<endl;
-       cout<<"There will be "<<extraRGBVals<<" extra RGB values."<<endl;
-
+       //cout<<"We're going to need "<<area<<" pixels."<<endl;
+       //cout<<"Height is: "<<height<<endl;
+       //cout<<"Width is: "<<width<<endl;
+       //cout<<"There will be "<<extraRGBVals<<" extra RGB values."<<endl;
+       //Extract msgBinary from two images
      }
      break;
    }
@@ -159,13 +160,12 @@ int main(int argc, char *argv[])
      CImg<unsigned char> img2(argv[2]);
 
      //Extract msgBinary from two images
-     msgBinary = bnryMsgFromImgs(img1, img2, extraRGBVals);  //One or both of these two are a lil bit off
+     msgBinary = bnryMsgFromImgs(img1, img2);  //This function is off a lil bit off (hehe)
 
      //Turn the binary into the message
-     msgChar = bnryToChar(msgBinary);  //One or both of these two are a lil bit off
+     msgChar = bnryToChar(msgBinary);
 
      cout<<"Secret message: "<<msgChar<<endl<<endl;
-     cout<<endl<<"Message binary: "<<msgBinary<<endl;
      break;
    }
  }

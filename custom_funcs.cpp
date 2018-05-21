@@ -44,9 +44,9 @@ int CheckArgs(int argc, char *argv[])
   //Make sure user entered proper file type
   if(arg1_ext == "txt" && arg2_ext == "")
     return 1;
-  else if(arg1_ext == "txt" && arg2_ext == "jpg")
+  else if(arg1_ext == "txt" && arg2_ext == "bmp")
     return 2;
-  else if(arg1_ext == "jpg" && arg2_ext == "jpg")
+  else if(arg1_ext == "bmp" && arg2_ext == "bmp")
     return 3;
   else
   {
@@ -227,12 +227,11 @@ void display(CImg<unsigned char>& img)
 /*================================
   Change the LSB of 2nd .jpg image
 =================================*/
-void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBinary)
+void txtToImgs(CImg<unsigned char>& orig, CImg<unsigned char>& steg, string msgBinary)
 {
   int msgBinarySlider = 0;
   int height = orig.height();
   int width = orig.width();
-
   //Change the LSB of steg so comparing the two .jpg's results in the same 0 or 1 of msgBinary
   for(int c=0; c<3; c++)
   {
@@ -246,12 +245,13 @@ void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBi
 
         //The if & else if are where the LSB is actually changed. I know I can increment steg w/o checking b/c RGB values are 1->254 inside of prettyColors()
         if(msgBinary[msgBinarySlider] == '0')
-          if((int)orig(y,x,0,c)%2 == (int)steg(y,x,0,c)%2)
-            steg(y,x,0,c)++;
+          if(((int)orig(y,x,c)%2) == ((int)steg(y,x,c)%2))
+            steg(y,x,c)++;
+
 
         else if(msgBinary[msgBinarySlider] == '1')
-          if((int)orig(y,x,0,c)%2 != (int)steg(y,x,0,c)%2)
-            steg(y,x,0,c)++;
+          if(((int)orig(y,x,c)%2) != ((int)steg(y,x,c)%2))
+            steg(y,x,c)++;
 
         msgBinarySlider++; //Increment every time
       }
@@ -265,11 +265,13 @@ void txtToImgs(CImg<unsigned char> orig, CImg<unsigned char>& steg, string msgBi
 /*=============================================
     EXTRACT MESSAGE FROM TWO IMAGES
 ==============================================*/
-string bnryMsgFromImgs(CImg<unsigned char> img1, CImg<unsigned char> img2, int extra)
+string bnryMsgFromImgs(CImg<unsigned char>& img1, CImg<unsigned char>& img2)
 {
   string retBinary = "";
   int height = img1.height();
   int width = img1.width();
+  cout<<endl<<"height: "<<height<<endl;
+  cout<<"width: "<<width<<endl;
 
   for(int c=0; c<3; c++)
   {
@@ -277,16 +279,7 @@ string bnryMsgFromImgs(CImg<unsigned char> img1, CImg<unsigned char> img2, int e
     {
       for(int y=0; y<width; y++)
       {
-        //Don't process any extra RGB values in the btm rt pixel
-        if(x==height && y> width-extraRGBVals)
-        {
-          cout<<"WUB"<<endl;
-          //Compare the last bits of the RGB values of this pixel
-          if((((int)img1(y,x,0,c)%2 == (int)img2(y,x,0,c)%2)))
-            retBinary+="1";
-          else
-            retBinary+="0";
-        }
+        retBinary += std::to_string(((int)img1(y,x,c)%2 == ((int)img2(y,x,c)%2) ));
       }
     }
   }
@@ -303,8 +296,9 @@ string bnryToChar(string msgBinary)
   string bnryLetter = "";
   int mediator = -1;
 
-  for(int i=0; i<msgBinary.length()-1; i++)
+  for(int i=0; i<msgBinary.length(); i++)
   {
+    //Add new bit to bnryLetter to be parsed every 7 interations
     (msgBinary[i] == '0') ? bnryLetter+="0" : bnryLetter+="1";
 
     if(bnryLetter.length() == 7)
