@@ -106,6 +106,20 @@ bool openTxtFile(string txtPath, ifstream& inpStream)
   }
 }
 
+/*=================
+   OPEN BMP FILE
+====================*/
+bool openBmpFile(string imgPath)
+{
+  if(std::ifstream(imgPath))
+    return true;
+  else
+  {
+    cout<<"File does not exist at directory \""<<imgPath<<"\""<<endl;
+    return false;
+  }
+}
+
 
 /*=====================================================
 READS IN TEXT FILE'S INFORMATION INTO ONE LONG STRING

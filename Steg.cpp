@@ -35,7 +35,8 @@ int main(int argc, char *argv[])
   int area = -1;
   int height = -1;
   int width = -1;
-
+  bool imgExists = false;
+  string imgPath = "";
 
 
                                                         /*
@@ -100,7 +101,7 @@ int main(int argc, char *argv[])
      if(txtExists)
      {
        storeTxtFile(inpStream, line, msgChar); //Store text file in one string
-       msgBinary = txtToBinary(msgChar, msgBinary); //Convert that string to binary
+       txtToBinary(msgChar, msgBinary); //Convert that string to binary
 
        //Get the number of pixels we're going to need to store the data
        numPixels = minNumPixels(msgChar.length());
@@ -130,13 +131,45 @@ int main(int argc, char *argv[])
      break;
    }
 
-   case 2:    //Input: .bmp and .txt   Output: img1.bmp img2.bmp
+   case 2:    //Input: .txt and .bmp  Output: .bmp
    {
-     //Read in to msgBinary
-     //See if there is enough space for steg to occur (possibly make the double steg here?)
-     //Make a copy of their input image
-     //Stegify the copy of that image
-     //Save the images 
+     txtPath = argv[1];
+     imgPath = argv[2];
+     txtExists = openTxtFile(txtPath, inpStream);
+     imgExists = openBmpFile(imgPath);
+
+     if(txtExists && imgExists)
+     {
+       storeTxtFile(inpStream, line, msgChar); //Store text file in one string
+       txtToBinary(msgChar, msgBinary);
+
+       //Make a copy of their input image && a steg copy that will actually be saved
+       CImg<unsigned char> original(argv[2]);
+       CImg<unsigned char> steg(original);
+
+       //Get the area of the images
+       area = original.height() * original.width();
+
+       //See if there is enough space for steg to occur (possibly make the double steg here?)
+       if(area * 3 >= msgBinary.length())
+       {
+         display(original);
+         display(steg);
+
+         //Change the LSB of steg
+         txtToImgs(original, steg, msgBinary);
+
+         //Save the images
+         steg.save("steg.bmp");
+       }
+       else
+       {
+         cout<<"Your message is to large for one bit LSB steganography! "<<endl;
+         cout<<"Your image's area must be at least "<<msgBinary.length()/3<<endl;
+       }
+
+
+     }
      break;
    }
    case 3:   //Input: .bmp and .bmp   Output: message.txt
@@ -146,7 +179,7 @@ int main(int argc, char *argv[])
      CImg<unsigned char> img2(argv[2]);
 
      //Extract msgBinary from two images
-     msgBinary = bnryMsgFromImgs(img1, img2);  //This function is off a lil bit off (hehe)
+     msgBinary = bnryMsgFromImgs(img1, img2);
 
      //Turn the binary into the message
      msgChar = bnryToChar(msgBinary);

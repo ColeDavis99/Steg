@@ -21,6 +21,9 @@ void printInstructions();
 //Returns true or false depending on if txt file opened succesfully
 bool openTxtFile(string txtPath, ifstream& inpStream);
 
+//Returns true or false depending on if bmp file opened succesfully
+bool openBmpFile(string imgPath);
+
 //Reads in text file's information into one long string
 void storeTxtFile(ifstream& inpStream, string line, string& msgChar);
 
