@@ -30,14 +30,8 @@ string txtToBinary(string msgChar, string& msgBinary);
 //Return num pixels needed to hold text info
 int minNumPixels(int len);
 
-//Return number of extra RGB values in the bottom right pixel of the image (0,1, or 2)
-int extraRGB(int len);
-
 //Recursively find two "squarest" ints that multiply to numPixels
 void sideLen(int numPixels, int& height, int& width);
-
-//return number of extra jumk pixels (tacked on end so img is squares)
-//int junkPixels(int pixelDimension, int numPixels);
 
 //Makes generated image randomized and pretty (for unsigned char images)
 void prettyColors(cimg_library::CImg<unsigned char>& img);

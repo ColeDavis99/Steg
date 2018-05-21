@@ -2,13 +2,11 @@
   Developer: Cole Davis
   Date: 05-17-2018
 
-  Goal:(Make the case1 generated images rectangular
-  if need be, remove all junk pixels from existance)
 
   Uses:
   1. ./exe MyMessage.txt
-  2. ./exe MyMessage.txt Image1.jpg
-  3. ./exe Image1.jpg Image2.jpg
+  2. ./exe MyMessage.txt Image1.bmp
+  3. ./exe Image1.bmp Image2.bmp
 =====================================*/
 #include "CImg.h"
 #include "custom_funcs.h"
@@ -32,9 +30,8 @@ int main(int argc, char *argv[])
   bool txtExists = false;
   string secretMessage = "";
 
-  // .jpg variables
+  // .bmp variables
   int numPixels = -1; //The number of pixels our images will have, and still be square
-  int extraRGBVals = -1; //The it's possible 1 or 2 of the bottomrightmost pixel's value is junk
   int area = -1;
   int height = -1;
   int width = -1;
@@ -43,7 +40,7 @@ int main(int argc, char *argv[])
 
                                                         /*
   //Make image and viewing window
-  CImg<unsigned char> image("pic2.jpg");
+  CImg<unsigned char> image("pic2.bmp");
   CImgDisplay disp1(image,"Before!");
   CImg<unsigned char> image2 = image;
 
@@ -96,9 +93,8 @@ int main(int argc, char *argv[])
 
  switch(which_process)
  {
-   case 1:
+   case 1:   //Input: .txt   Output: img1.bmp img2.bmp
    {
-     //One text file
      txtPath = argv[1];
      txtExists = openTxtFile(txtPath, inpStream);
      if(txtExists)
@@ -109,9 +105,6 @@ int main(int argc, char *argv[])
        //Get the number of pixels we're going to need to store the data
        numPixels = minNumPixels(msgChar.length());
 
-       //Get the number of extra RGB values in the bottom right pixel of steg.jpg
-       extraRGBVals = extraRGB(msgChar.length());
-
        //Get the dimensions of our image
        sideLen(numPixels, height, width);
 
@@ -120,40 +113,33 @@ int main(int argc, char *argv[])
 
 
 
-
-       //We'll make two images, original.jpg and steg.jpg.
+       //We'll make two images, original.bmp and steg.bmp.
        CImg<unsigned char> original(width, height, 1, 3);  // Define a pixDim x pixDim color image (3 channels).
        prettyColors(original);  //Randomize pixel RGB values
 
-       //Copy construct steg.jpg
+       //Copy construct steg.bmp
        CImg<unsigned char> steg(original);
 
        //Change the LSB of steg
        txtToImgs(original, steg, msgBinary);
 
-       //display(original);
-       //display(steg);
-
        //Save the newly generated images
-       original.save("original.bmp");
-       steg.save("steg.bmp");
-
-       //cout<<"We're going to need "<<area<<" pixels."<<endl;
-       //cout<<"Height is: "<<height<<endl;
-       //cout<<"Width is: "<<width<<endl;
-       //cout<<"There will be "<<extraRGBVals<<" extra RGB values."<<endl;
-       //Extract msgBinary from two images
+       original.save("img1.bmp");
+       steg.save("img2.bmp");
      }
      break;
    }
 
-   case 2:
+   case 2:    //Input: .bmp and .txt   Output: img1.bmp img2.bmp
    {
-     //One text file and one image file
-
+     //Read in to msgBinary
+     //See if there is enough space for steg to occur (possibly make the double steg here?)
+     //Make a copy of their input image
+     //Stegify the copy of that image
+     //Save the images 
      break;
    }
-   case 3:
+   case 3:   //Input: .bmp and .bmp   Output: message.txt
    {
      //Copy in the image files from the directory
      CImg<unsigned char> img1(argv[1]);
@@ -165,7 +151,7 @@ int main(int argc, char *argv[])
      //Turn the binary into the message
      msgChar = bnryToChar(msgBinary);
 
-     cout<<"Secret message: "<<msgChar<<endl<<endl;
+     cout<<"Secret message: "<<endl<<endl<<msgChar;
      break;
    }
  }

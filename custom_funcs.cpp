@@ -115,7 +115,7 @@ void storeTxtFile(ifstream& inpStream, string line, string& msgChar)
   while(!inpStream.eof())
   {
     //Store entirety of message into var msgChar
-    getline(inpStream, line);
+    getline(inpStream, line, '\r');
     msgChar += line;
   }
   return;
@@ -146,23 +146,6 @@ int minNumPixels(int len)
 }
 
 
-/*=========================================
-RETURN NUMBER OF EXTRA RGB VALS (0,1, or 2)
-===========================================*/
-int extraRGB(int len)
-{
-  double pxPerChar = 2.3333333333;
-
-  //Find the number of extra RGB values in the bottom right pixel of the image
-  if((ceil(pxPerChar * len) - (pxPerChar*len)) < 0.3)
-    return 0;
-  else if((ceil(pxPerChar * len) - (pxPerChar*len)) > 0.6)
-    return 2;
-  else
-    return 1;
-}
-
-
 /*===========================================
  Find two "squarest" ints that multiply and add up to numPixels
 ============================================*/
@@ -186,14 +169,6 @@ void sideLen(int numPixels, int& height, int& width)
   return;
 }
 
-
-/*===========================================
-    RETURN NUMBER OF EXTRA JUNK PIXELS (tacked on end so img is squares)
-============================================*/
-// int junkPixels(int pixelDimension, int numPixels)
-// {
-//   return (pixelDimension*pixelDimension) - numPixels;
-// }
 
 /*===========================================
   MAKES GENERATED IMAGE RANDOMIZED AND PRETTY (for unsigned char images)
@@ -270,8 +245,6 @@ string bnryMsgFromImgs(CImg<unsigned char>& img1, CImg<unsigned char>& img2)
   string retBinary = "";
   int height = img1.height();
   int width = img1.width();
-  cout<<endl<<"height: "<<height<<endl;
-  cout<<"width: "<<width<<endl;
 
   for(int c=0; c<3; c++)
   {
