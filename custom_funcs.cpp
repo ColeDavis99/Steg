@@ -1,7 +1,7 @@
 #include "Dependencies.h"
 #include "custom_funcs.h"
 #include "CImg.h"
-
+#include <vector>
 
 using std::string;
 using namespace cimg_library;
