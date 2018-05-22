@@ -141,6 +141,7 @@ int main(int argc, char *argv[])
      if(txtExists && imgExists)
      {
        storeTxtFile(inpStream, line, msgChar); //Store text file in one string
+       cout<<"case2 this is msg char with returns: "<<msgChar<<endl;
        txtToBinary(msgChar, msgBinary);
 
        //Make a copy of their input image && a steg copy that will actually be saved
@@ -184,7 +185,9 @@ int main(int argc, char *argv[])
      //Turn the binary into the message
      msgChar = bnryToChar(msgBinary);
 
-     cout<<"Secret message: "<<endl<<endl<<msgChar;
+     //Generate .txt output file
+     std::ofstream o("secret_message.txt");
+     o << msgChar << std::endl;
      break;
    }
  }
