@@ -3,9 +3,7 @@ This is my first project with steganography. I chose the most basic type of steg
 requires basic command line skills. If Steg 2.0 pops up in the future, there may be a Qt GUI in the works.
 
 
-/*==========================
-        IMPORTANT
-==========================*/
+<h2>Important</h2>
 This program only works with .bmp files and .txt files in the current version (1.0).
 If you wish to use other image types other than .bmp, you can't. You can easily change the file
 format using this command in terminal though:
@@ -14,9 +12,7 @@ format using this command in terminal though:
 
 
 
-/*==========================
-     REQUIRED LIBRARIES
-==========================*/
+<h2>REQUIRED LIBRARIES</h2>
 Short version: run "sudo apt-get install libx11-dev"
 
 Xlib is required by CImg.h, so this command needs to be run: "sudo apt-get install libx11-dev"
@@ -25,17 +21,13 @@ For the curious: https://en.wikipedia.org/wiki/Xlib
 
 
 
-/*==========================
-    BUILDING EXECUTABLE
-==========================*/
+<h2>BUILDING EXECUTABLE</h2>
 Open terminal, navigate to Steg, type "make".
 The executable is named "stegify".
 
 
 
-/*====================
-      OVERVIEW
-=====================*/
+<h2>OVERVIEW</h2>
 There are three use cases of the program:
 
 
@@ -51,7 +43,7 @@ Case 3 |    X.txt & X.bmp   |   steg.bmp
 
 
 
-Case 1) IMAGES FROM .TXT
+Case 1) *IMAGES FROM .TXT*
 *  This case generates two images that
 
 *  Create a .txt file and write your secret message that will be hidden in the two images.
@@ -63,7 +55,7 @@ Case 1) IMAGES FROM .TXT
 
 
 
-Case 2) .TXT FROM IMAGES (not really a "case", it just generates the secret message)
+Case 2) *.TXT FROM IMAGES (not really a "case", it just generates the secret message)*
 *  This is the case that does the least significant bit comparison and generates the secret message.
 
 *  In terminal, type "./stegify img1.bmp  img2.bmp" if you just used case 1
@@ -75,7 +67,7 @@ Case 2) .TXT FROM IMAGES (not really a "case", it just generates the secret mess
 
 
 
-Case 3)  .TXT TO PREEXISTING IMAGE
+Case 3)  *.TXT TO PREEXISTING IMAGE*
 *  The last case is perhaps the coolest, it allows you to "stegify" any .bmp image of your choice
    instead of just having a randomly generated rainbow-ey image.
 
@@ -91,9 +83,7 @@ Case 3)  .TXT TO PREEXISTING IMAGE
 
 
 
- /*===========================
-       HOW TO USE (syntax)
- ============================*/
+ <h2>HOW TO USE (syntax)</h2>
  There are a few files that come included, let's take a quick look at how to get stegifying.
  Before we get started, go to the Steg directory and type "make" to build the executable.
 
