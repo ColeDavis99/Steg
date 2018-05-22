@@ -31,15 +31,18 @@ The executable is named "stegify".
 There are three use cases of the program:
 
 
-(X= filename)
-       |      Input         |      Output
-=======|====================|======================
-Case 1 |    X.txt           |   img1.bmp & img2.bmp
-       |                    |
-Case 2 |    X.bmp x2        |   secretmessage.txt
-       |                    |
-Case 3 |    X.txt & X.bmp   |   steg.bmp
-=======|====================|======================
+
+
+| Input  | Output |
+| ------------- | ------------- |
+| X.txt  | img1.bmp & img2.bmp  |
+| X.bmp x2  | secretmessage.txt  |
+| X.txt & X.bmp | steg.bmp |
+
+
+
+
+
 
 
 
