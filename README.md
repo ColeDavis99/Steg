@@ -92,7 +92,7 @@ Case 3 |    X.txt & X.bmp   |   steg.bmp
 
 
 
- Case 1)
+ <h4>Case 1)</h4>
    Alright, I'll make these quick. Here's case 1 with the files I've included:
 
    1)  ./stegify ody.txt                    //Generate two .bmp files
@@ -100,16 +100,16 @@ Case 3 |    X.txt & X.bmp   |   steg.bmp
 
 
 
- Case 2) (This case is included in
+ <h4>Case 2) (This case is included in case 1 and case 3)</h4>
    That was quick indeed. Here's the two different ways case 2 is used:
 
-   A)  ./stegify img1.bmp img2.bmp                                        //If you used case1 to generate both .bmp files
+      A)  ./stegify img1.bmp img2.bmp                                        //If you used case1 to generate both .bmp files
 
-   B)  ./stegify steg.bmp polyphemus.bmp   				//If you used case3 to generate one .bmp file
+      B)  ./stegify steg.bmp polyphemus.bmp   				//If you used case3 to generate one .bmp file
 
 
 
- Case 3)
+ <h4>Case 3)</h4>
    Speed. Here's case 3:
 
    1)  ./stegify ody.txt polyphemus.bmp         //Generate steg.bmp
