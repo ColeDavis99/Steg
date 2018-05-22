@@ -95,25 +95,25 @@ Case 3 |    X.txt & X.bmp   |   steg.bmp
  <h4>Case 1)</h4>
    Alright, I'll make these quick. Here's case 1 with the files I've included:
 
-   1)  ./stegify ody.txt                    //Generate two .bmp files
-   2)  ./stegify img1.bmp img2.bmp          //Generate secretmessage.txt from the .bmp files (this is same as case 2 A)
+   1)  ./stegify ody.txt &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Generate two .bmp files
+   2)  ./stegify img1.bmp img2.bmp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Generate secretmessage.txt from the .bmp files (this is same as case 2 A)
 
 
 
  <h4>Case 2) (This case is included in case 1 and case 3)</h4>
    That was quick indeed. Here's the two different ways case 2 is used:
 
-   A)  ./stegify img1.bmp img2.bmp                                        //If you used case1 to generate both .bmp files
+   A)  ./stegify img1.bmp img2.bmp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//If you used case1 to generate both .bmp files
 
-   B)  ./stegify steg.bmp polyphemus.bmp   				//If you used case3 to generate one .bmp file
+   B)  ./stegify steg.bmp polyphemus.bmp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//If you used case3 to generate one .bmp file
 
 
 
  <h4>Case 3)</h4>
    Speed. Here's case 3:
 
-   1)  ./stegify ody.txt polyphemus.bmp         //Generate steg.bmp
-   2)  ./stegify steg.bmp polyphemus.bmp        //Create secretmessage.txt steg.bmp and polyphemus.bmp (this is same as case 2 B)
+   1)  ./stegify ody.txt polyphemus.bmp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Generate steg.bmp
+   2)  ./stegify steg.bmp polyphemus.bmp    &nbsp;&nbsp;&nbsp;&nbsp;//Create secretmessage.txt steg.bmp and polyphemus.bmp (this is same as case 2 B)
 
 
 
