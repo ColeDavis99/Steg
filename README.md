@@ -103,9 +103,9 @@ Case 3 |    X.txt & X.bmp   |   steg.bmp
  <h4>Case 2) (This case is included in case 1 and case 3)</h4>
    That was quick indeed. Here's the two different ways case 2 is used:
 
-      A)  ./stegify img1.bmp img2.bmp                                        //If you used case1 to generate both .bmp files
+   A)  ./stegify img1.bmp img2.bmp                                        //If you used case1 to generate both .bmp files
 
-      B)  ./stegify steg.bmp polyphemus.bmp   				//If you used case3 to generate one .bmp file
+   B)  ./stegify steg.bmp polyphemus.bmp   				//If you used case3 to generate one .bmp file
 
 
 
