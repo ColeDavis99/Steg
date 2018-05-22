@@ -291,9 +291,18 @@ string bnryToChar(string msgBinary)
     if(bnryLetter.length() == 7)
     {
       mediator = (char)bitset<7>(bnryLetter).to_ulong();
-      retStr+=(char)mediator;
-      bnryLetter = "";
+
+      //Don't process junk values
+      if((int)mediator >= 127)
+        goto foundJunk;
+      else
+      {
+        retStr+=(char)mediator;
+        bnryLetter = "";
+      }
+
     }
   }
+  foundJunk:
   return retStr;
 }

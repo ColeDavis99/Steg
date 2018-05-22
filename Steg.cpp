@@ -141,7 +141,6 @@ int main(int argc, char *argv[])
      if(txtExists && imgExists)
      {
        storeTxtFile(inpStream, line, msgChar); //Store text file in one string
-       cout<<"case2 this is msg char with returns: "<<msgChar<<endl;
        txtToBinary(msgChar, msgBinary);
 
        //Make a copy of their input image && a steg copy that will actually be saved
@@ -154,8 +153,8 @@ int main(int argc, char *argv[])
        //See if there is enough space for steg to occur (possibly make the double steg here?)
        if(area * 3 >= msgBinary.length())
        {
-         display(original);
-         display(steg);
+         //display(original);
+         //display(steg);
 
          //Change the LSB of steg
          txtToImgs(original, steg, msgBinary);
@@ -184,7 +183,7 @@ int main(int argc, char *argv[])
 
      //Turn the binary into the message
      msgChar = bnryToChar(msgBinary);
-
+     
      //Generate .txt output file
      std::ofstream o("secret_message.txt");
      o << msgChar << std::endl;
