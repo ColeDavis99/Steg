@@ -12,7 +12,7 @@ format using this command in terminal though:
 
 
 
-<h2>REQUIRED LIBRARIES</h2>
+<h2>Required Libraries</h2>
 Short version: run "sudo apt-get install libx11-dev"
 
 Xlib is required by CImg.h, so this command needs to be run: "sudo apt-get install libx11-dev"
@@ -21,13 +21,13 @@ For the curious: https://en.wikipedia.org/wiki/Xlib
 
 
 
-<h2>BUILDING EXECUTABLE</h2>
+<h2>Building Executable</h2>
 Open terminal, navigate to Steg, type "make".
 The executable is named "stegify".
 
 
 
-<h2>OVERVIEW</h2>
+<h2>Overview</h2>
 There are three use cases of the program:
 
 
@@ -43,7 +43,7 @@ Case 3 |    X.txt & X.bmp   |   steg.bmp
 
 
 
-Case 1) *IMAGES FROM .TXT*
+<h4>Case 1) Images from .txt</h4>
 *  This case generates two images that
 
 *  Create a .txt file and write your secret message that will be hidden in the two images.
@@ -55,7 +55,7 @@ Case 1) *IMAGES FROM .TXT*
 
 
 
-Case 2) *.TXT FROM IMAGES (not really a "case", it just generates the secret message)*
+<h4>Case 2) .txt from images (not really a "case", it just generates the secret message)</h4>
 *  This is the case that does the least significant bit comparison and generates the secret message.
 
 *  In terminal, type "./stegify img1.bmp  img2.bmp" if you just used case 1
@@ -67,7 +67,7 @@ Case 2) *.TXT FROM IMAGES (not really a "case", it just generates the secret mes
 
 
 
-Case 3)  *.TXT TO PREEXISTING IMAGE*
+<h4>Case 3) .txt to preexisting image</h4>
 *  The last case is perhaps the coolest, it allows you to "stegify" any .bmp image of your choice
    instead of just having a randomly generated rainbow-ey image.
 
