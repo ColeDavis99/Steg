@@ -112,7 +112,15 @@ bool openTxtFile(string txtPath, ifstream& inpStream)
 bool openBmpFile(string imgPath)
 {
   if(std::ifstream(imgPath))
-    return true;
+  {
+    if(imgPath != "steg.bmp")
+      return true;
+    else
+    {
+      cout<<"Your input image can not be named \"steg\""<<endl;
+      return false;
+    }
+  }
   else
   {
     cout<<"File does not exist at directory \""<<imgPath<<"\""<<endl;
