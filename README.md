@@ -47,7 +47,7 @@ There are three use cases of the program:
 
 
 <h4>Case 1) Images from .txt</h4>
-*  This case generates two images that
+*  This case generates two images
 
 *  Create a .txt file and write your secret message that will be hidden in the two images.
 
