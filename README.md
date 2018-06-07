@@ -117,9 +117,3 @@ There are three use cases of the program:
 
    1)  ./stegify ody.txt polyphemus.bmp &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//Generate steg.bmp
    2)  ./stegify steg.bmp polyphemus.bmp    &nbsp;&nbsp;&nbsp;&nbsp;//Create secretmessage.txt steg.bmp and polyphemus.bmp (this is same as case 2 B)
-
-
-
-
-
-Thanks for checking my repo out dawg.
