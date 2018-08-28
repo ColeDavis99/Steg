@@ -83,8 +83,8 @@ void printInstructions()
 {
   cout<<"ERROR: Program arguments must fit of these three templates: \n"<<
 		"1) [file.txt]\n"<<
-		"2) [file.txt] [file.jpg]\n"<<
-		"3) [file.jpg] [file.jpg]\n"<<endl;
+		"2) [file.txt] [file.bmp]\n"<<
+		"3) [file.bmp] [file.bmp]\n"<<endl;
   return;
 }
 
