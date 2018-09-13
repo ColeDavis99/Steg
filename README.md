@@ -1,6 +1,5 @@
 # Steg 1.0
-This is my first project with steganography. I chose the most basic type of steganography, least significant bit. I developed this tutorial with the Linux OS in mind, but getting everything set up on Windows is similar. In it's current state, this program
-requires basic command line skills. If Steg 2.0 pops up in the future, there may be a Qt GUI in the works.
+This is my first project with steganography. I chose the most basic type of steganography, least significant bit. In it's current state, this program requires basic command line skills. If Steg 2.0 pops up in the future, there may be a Qt GUI in the works.
 
 
 <h2>Important</h2>
