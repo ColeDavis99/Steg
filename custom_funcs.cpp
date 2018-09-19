@@ -35,7 +35,7 @@ int CheckArgs(int argc, char *argv[])
     if(getFileExt(arg2, arg2_ext) == false)
       return 0;
   }
-  //Flip extension strings
+  //Un-flip extension strings
   reverse(arg1_ext.begin(), arg1_ext.end());
   reverse(arg2_ext.begin(), arg2_ext.end());
 
